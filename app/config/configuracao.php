@@ -3,7 +3,7 @@
 //dirname() retorna o nome do diretorio em que o arquivo está
 define('APP', dirname(dirname(__FILE__)));
 
-define('URL', 'http://localhost:94/projetoBaseMVC');
+define('URL', 'http://localhost:94/ac-paineladm');
 
 define('APP_NOME', 'AC Painel Administrativo');
 

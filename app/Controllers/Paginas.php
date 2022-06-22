@@ -7,7 +7,6 @@ class Paginas extends Controller
         //Parâmetros enviados para o método do controller VIEW
         $dados = [
             'tituloPagina' => 'Página Inicial',
-            'descricao' => 'Curso de PHP'
         ];
 
         //Chamada do novo objeto PAGINAS 

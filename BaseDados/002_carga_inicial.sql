@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `tb_agenda_convidados` (
   KEY `fk_usuario_edicao_tb_usuario` (`fk_usuario_edicao`),
   CONSTRAINT `fk_usuario_edicao_tb_agenda_convidados` FOREIGN KEY (`fk_usuario_edicao`) REFERENCES `tb_usuario` (`id_usuario`),
   CONSTRAINT `fk_usuario_tb_agenda_convidados` FOREIGN KEY (`fk_usuario`) REFERENCES `tb_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `tb_agenda_convidados` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tb_agenda_convidados` ENABLE KEYS */;
@@ -73,11 +73,11 @@ CREATE TABLE IF NOT EXISTS `tb_usuario` (
   KEY `fk_tipo_usuario_tb_usuario` (`fk_tipo_usuario`),
   CONSTRAINT `fk_cargo_tb_usuario` FOREIGN KEY (`fk_cargo`) REFERENCES `tb_cargo` (`id_cargo`),
   CONSTRAINT `fk_tipo_usuario_tb_usuario` FOREIGN KEY (`fk_tipo_usuario`) REFERENCES `tb_tipo_usuario` (`id_tipo_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
 INSERT INTO `tb_usuario` (`id_usuario`, `ds_nome_usuario`, `ds_email_usuario`, `ds_senha`, `fk_cargo`, `fk_tipo_usuario`) VALUES
-	(9, 'admin', 'admin@artecult.com', '$2y$10$nkUWLB.AjXJCiu8G1HLAD.5Y71tnONPeS4fEmcwGOzsckfIULFryK', 5, 1);
+	(1, 'admin', 'admin@artecult.com', '$2y$10$QupjPG596vqS78ArxZqAquTb38gdCyA/44yfyaB5fTEvR3oKEq34S', 5, 1);
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

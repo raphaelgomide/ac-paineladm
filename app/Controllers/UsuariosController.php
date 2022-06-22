@@ -71,7 +71,7 @@ class UsuariosController extends Controller
 
                         //Para exibir mensagem success , não precisa informar o tipo de classe
                         Alertas::mensagem('usuario', 'Usuário cadastrado com sucesso');
-                        Redirecionamento::redirecionar('usuariosController/login');
+                        Redirecionamento::redirecionar('paginas/index');
                     } else {
                         die("Erro ao armazenar usuário no banco de dados");
                     }

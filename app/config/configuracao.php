@@ -14,4 +14,4 @@ define('URL', 'http://localhost:94/ac-paineladm');
 
 define('APP_NOME', 'AC Painel Administrativo');
 
-define('APP_VERSAO', '1.0.2');
+define('APP_VERSAO', '1.0.3');

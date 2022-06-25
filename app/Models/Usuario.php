@@ -70,24 +70,97 @@ class Usuario
     }
 
     //A principio, criada para retornar a linha com os dados do usuário específico
-    public function lerUsuarioPorId($id){
+    public function lerUsuarioPorId($id)
+    {
         $this->db->query("SELECT * FROM tb_usuario WHERE id_usuario = :id_usuario");
-        
+
         $this->db->bind("id_usuario", $id);
 
         return $this->db->resultado();
     }
 
-    public function listarTipoUsuario(){
+    public function listarTipoUsuario()
+    {
         $this->db->query("SELECT * FROM tb_tipo_usuario ORDER BY ds_tipo_usuario");
-        
+
         return $this->db->resultados();
     }
 
-    public function listarCargoUsuario(){
+    public function listarCargoUsuario()
+    {
         $this->db->query("SELECT * FROM tb_cargo ORDER BY ds_cargo");
-        
+
         return $this->db->resultados();
     }
 
+
+    public function visualizarUsuarios()
+    {
+        $this->db->query("SELECT * FROM tb_usuario ORDER BY ds_nome_usuario");
+
+        return $this->db->resultados();
+    }
+
+
+    public function atualizarUsuariosSemSenha($dados)
+    {
+
+        $this->db->query("UPDATE tb_usuario SET
+            ds_nome_usuario = :ds_nome_usuario,
+            ds_email_usuario = :ds_email_usuario,
+            fk_cargo = :fk_cargo,
+            fk_tipo_usuario = :fk_tipo_usuario
+            WHERE id_usuario = :id_usuario
+        ");
+
+        $this->db->bind("ds_nome_usuario", $dados['txtNome']);
+        $this->db->bind("ds_email_usuario", $dados['txtEmail']);
+        $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
+        $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
+        $this->db->bind("id_usuario", $dados['id_usuario']);
+
+        if ($this->db->executa()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function atualizarUsuariosComSenha($dados)
+    {
+
+        $this->db->query("UPDATE tb_usuario SET
+            ds_nome_usuario = :ds_nome_usuario,
+            ds_email_usuario = :ds_email_usuario,
+            fk_cargo = :fk_cargo,
+            fk_tipo_usuario = :fk_tipo_usuario,
+            ds_senha = :ds_senha
+            WHERE id_usuario = :id_usuario
+        ");
+
+        $this->db->bind("ds_nome_usuario", $dados['txtNome']);
+        $this->db->bind("ds_email_usuario", $dados['txtEmail']);
+        $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
+        $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
+        $this->db->bind("id_usuario", $dados['id_usuario']);
+        $this->db->bind("ds_senha", $dados['txtSenha']);
+
+        if ($this->db->executa()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deletarUsuario($id){
+
+        $this->db->query("DELETE FROM tb_usuario WHERE id_usuario = :id_usuario");
+        $this->db->bind("id_usuario", $id);
+
+        if ($this->db->executa()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

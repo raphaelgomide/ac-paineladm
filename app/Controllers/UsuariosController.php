@@ -5,12 +5,31 @@ class UsuariosController extends Controller
     //Construtor do model do Usuário que fará o acesso ao banco
     public function __construct()
     {
+        //Redireciona para tela de login caso usuario nao esteja logado
+        if (!IsLoged::estaLogado()) {
+            //Está vazio, para retornar ao diretorio raiz
+            Redirecionamento::redirecionar('');
+        }
+
         $this->usuarioModel = $this->model("Usuario");
     }
 
+
+    //Método padrão que é invocado ao chamar a controller
+    public function index()
+    {
+        $dados = [
+            'usuarios' =>  $this->usuarioModel->visualizarUsuarios()
+        ];
+
+        //Retorna para a view
+        $this->view('usuarios/index', $dados);
+    }
+
+
     public function cadastrar()
     {
-        
+
         $tiposUsuario = $this->usuarioModel->listarTipoUsuario();
         $cargoUsuario = $this->usuarioModel->listarCargoUsuario();
 
@@ -71,7 +90,7 @@ class UsuariosController extends Controller
 
                         //Para exibir mensagem success , não precisa informar o tipo de classe
                         Alertas::mensagem('usuario', 'Usuário cadastrado com sucesso');
-                        Redirecionamento::redirecionar('paginas/index');
+                        Redirecionamento::redirecionar('usuariosController/visualizar');
                     } else {
                         die("Erro ao armazenar usuário no banco de dados");
                     }
@@ -98,78 +117,99 @@ class UsuariosController extends Controller
         $this->view('usuarios/cadastrar', $dados);
     }
 
-    public function login()
+    public function editar($id)
     {
+
+        $usuario = $this->usuarioModel->lerUsuarioPorId($id);
+        $tiposUsuario = $this->usuarioModel->listarTipoUsuario();
+        $cargoUsuario = $this->usuarioModel->listarCargoUsuario();
+
         //Evita que codigos maliciosos sejam enviados pelos campos
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         if (isset($formulario)) {
 
             $dados = [
+                'txtNome' => trim($formulario['txtNome']),
                 'txtEmail' => trim($formulario['txtEmail']),
-                'txtSenha' => trim($formulario['txtSenha'])
+                'txtSenha' => trim($formulario['txtSenha']),
+                'txtConfirmaSenha' => trim($formulario['txtConfirmaSenha']),
+                'cboTipoUsuario' => $formulario['cboTipoUsuario'],
+                'cboCargoUsuario' => $formulario['cboCargoUsuario'],
+                'id_usuario' => $id,
+                'usuario' => $usuario,
+                'tiposUsuario' => $tiposUsuario,
+                'cargoUsuario' => $cargoUsuario
+
             ];
 
-            if (in_array("", $formulario)) {
+            // var_dump($dados['txtNome']);
 
-                //Verifica se está vazio
-                if (empty($formulario['txtEmail'])) {
-                    $dados['email_erro'] = "Preencha o email";
-                }
-                if (empty($formulario['txtSenha'])) {
-                    $dados['senha_erro'] = "Preencha a senha";
-                }
+            if (Checa::checarNome($formulario['txtNome'])) {
+                $dados['nome_erro'] = "Nome inválido";
+            } elseif (Checa::checarEmail($formulario['txtEmail'])) {
+                $dados['email_erro'] = "Email inválido";
             } else {
-                //Invoca método estatico da classe 
-                if (Checa::checarEmail($formulario['txtEmail'])) {
-                    $dados['email_erro'] = "Email inválido";
-                } elseif (strlen($formulario['txtSenha']) < 6) {
-                    $dados['senha_erro'] = "A senha precisa ter no mínimo 6 caracteres";
+                // var_dump($formulario['txtSenha']);
+
+                if ($formulario['txtSenha'] == "" && $formulario['txtConfirmaSenha'] == "") {
+
+                    if ($this->usuarioModel->atualizarUsuariosSemSenha($dados)) {
+                        //Para exibir mensagem success , não precisa informar o tipo de classe
+                        Alertas::mensagem('usuario', 'Usuário atualizado com sucesso');
+                        Redirecionamento::redirecionar('usuariosController');
+                    }
                 } else {
 
-                    $usuario = $this->usuarioModel->checarLogin($formulario['txtEmail'], $formulario['txtSenha']);
-
-                    if ($usuario) {
-                        $this->criarSessaoUsuario($usuario);
+                    if (strlen($formulario['txtSenha']) < 6) {
+                        $dados['senha_erro'] = "A senha precisa ter no mínimo 6 caracteres";
+                    } elseif ($formulario['txtSenha'] != $formulario['txtConfirmaSenha']) {
+                        $dados['confirma_senha_erro'] = "As senhas são diferentes";
                     } else {
-                        Alertas::mensagem('usuario', 'Usuário ou senha inválidos','alert alert-danger');
+
+                        //Criptografa a senha com hash em php
+                        $dados['txtSenha'] = password_hash($formulario['txtSenha'], PASSWORD_DEFAULT);
+
+                        if ($this->usuarioModel->atualizarUsuariosComSenha($dados)) {
+                            //Para exibir mensagem success , não precisa informar o tipo de classe
+                            Alertas::mensagem('usuario', 'Usuário atualizado com sucesso');
+                            Redirecionamento::redirecionar('usuariosController');
+                        }
                     }
                 }
             }
         } else {
+
+
             $dados = [
-                'txtNome' => '',
-                'txtEmail' => '',
-                'email_erro' => '',
-                'senha_erro' => ''
+                'usuario' => $usuario,
+                'tiposUsuario' => $tiposUsuario,
+                'cargoUsuario' => $cargoUsuario
             ];
         }
-
         //Retorna para a view
-        $this->view('usuarios/login', $dados);
+        $this->view('usuarios/editar', $dados);
     }
 
-    //Cria as variaveis de sessao ao fazer login, resgatando informações do usuário
-    private function criarSessaoUsuario($usuario){
-        $_SESSION['id_usuario'] = $usuario->id_usuario;
-        $_SESSION['ds_nome_usuario']= $usuario->ds_nome_usuario;
-        $_SESSION['ds_email_usuario'] = $usuario->ds_email_usuario;
-        $_SESSION['fk_cargo'] = $usuario->fk_cargo;
-        $_SESSION['fk_tipo_usuario'] = $usuario->fk_tipo_usuario;
+    public function deletar($id)
+    {
 
-        Redirecionamento::redirecionar('paginas/home');
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+
+        $metodo = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_STRING);
+
+        if ($id && $metodo == 'POST') {
+
+            if ($this->usuarioModel->deletarUsuario($id)) {
+
+                //Para exibir mensagem success , não precisa informar o tipo de classe
+                Alertas::mensagem('usuario', 'Usuário deletado com sucesso');
+                Redirecionamento::redirecionar('usuariosController');
+            } else {
+                die("Erro ao deletar o usuário no banco de dados");
+            }
+        } else {
+            Alertas::mensagem('usuario', 'Não foi possível deletar o usuário', 'alert alert-danger');
+            Redirecionamento::redirecionar('usuariosController');
+        }
     }
-
-
-    //Destroi todas as variáveis de sessão para efetuar logof
-    public function sair(){
-        unset($_SESSION['id_usuario']);
-        unset($_SESSION['ds_nome_usuario']);
-        unset($_SESSION['ds_email_usuario']);
-        unset($_SESSION['fk_cargo']);
-        unset($_SESSION['fk_tipo_usuario']);
-
-        session_destroy();
-
-        Redirecionamento::redirecionar('usuariosController/login');
-    } 
 }

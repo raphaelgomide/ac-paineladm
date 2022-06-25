@@ -20,7 +20,7 @@
 
                                     <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-artcor nav-link" aria-current="page" href="<?php echo URL . '/usuariosController/cadastrar' ?>">Usuário</a></li>
+                                        <li><a class="dropdown-artcor nav-link" aria-current="page" href="<?php echo URL . '/usuariosController/visualizar' ?>">Usuário</a></li>
                                     </ul>
                                 </li>
 
@@ -42,11 +42,11 @@
                     <?php if (isset($_SESSION['id_usuario'])) { ?>
                         <span class="navbar-text">
                             <p style="color: white;">Olá, <?php echo ucfirst($_SESSION['ds_nome_usuario']); ?>, Seja bem vindo(a)</p>
-                            <a class="btn btn-sm btn-danger" href="<?php echo URL . '/usuariosController/sair' ?>">Sair</a>
+                            <a class="btn btn-sm btn-danger" href="<?php echo URL . '/LoginController/sair' ?>">Sair</a>
                         </span>
                     <?php } else { ?>
                         <span class="navbar-text">
-                            <a href="<?php echo URL . '/usuariosController/login' ?>" class="btn btn-artcor">Entrar</a>
+                            <a href="<?php echo URL . '/LoginController/login' ?>" class="btn btn-artcor">Entrar</a>
                         </span>
                     <?php } ?>
 

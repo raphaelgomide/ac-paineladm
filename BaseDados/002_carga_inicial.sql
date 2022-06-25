@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `tb_usuario` (
 
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
 INSERT INTO `tb_usuario` (`id_usuario`, `ds_nome_usuario`, `ds_email_usuario`, `ds_senha`, `fk_cargo`, `fk_tipo_usuario`) VALUES
-	(1, 'admin', 'admin@artecult.com', '$2y$10$QupjPG596vqS78ArxZqAquTb38gdCyA/44yfyaB5fTEvR3oKEq34S', 5, 1);
+	(0, 'admin', 'admin@artecult.com', '$2y$10$QupjPG596vqS78ArxZqAquTb38gdCyA/44yfyaB5fTEvR3oKEq34S', 5, 1);
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

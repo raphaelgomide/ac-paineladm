@@ -96,7 +96,7 @@ class Usuario
 
     public function visualizarUsuarios()
     {
-        $this->db->query("SELECT * FROM tb_usuario ORDER BY ds_nome_usuario");
+        $this->db->query("SELECT * FROM tb_usuario WHERE id_usuario > 0  ORDER BY ds_nome_usuario ");
 
         return $this->db->resultados();
     }

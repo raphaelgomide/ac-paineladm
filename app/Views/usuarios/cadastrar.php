@@ -18,37 +18,37 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="txtEmail" class="form-label">Tipo usuário: *</label>
-                    <select class="form-select <?php echo $dados['tipoUsuario_erro'] ? 'is-invalid' : '' ?>" name="cboTipoUsuario" id="cboTipoUsuario">
+                    <label for="cboPerfilUsuario" class="form-label">Perfil usuário: *</label>
+                    <select class="form-select <?php echo $dados['perfilUsuario_erro'] ? 'is-invalid' : '' ?>" name="cboPerfilUsuario" id="cboPerfilUsuario" onchange="disableEditoria()">
                         <option value="NULL"></option>
-                        <?php foreach ($dados['tiposUsuario'] as $tiposUsuario) { 
+                        <?php foreach ($dados['perfilUsuario'] as $perfilUsuario) { 
                             //Resgata valor do select 
-                            $tiposUsuarioSelected = ''; 
-                            if($tiposUsuario->id_tipo_usuario == $dados['cboTipoUsuario']){
-                                $tiposUsuarioSelected = 'selected';
+                            $perfilUsuarioSelected = ''; 
+                            if($perfilUsuario->id_perfil_usuario == $dados['cboPerfilUsuario']){
+                                $perfilUsuarioSelected = 'selected';
                             }
                         ?>
-                            <option <?php echo $tiposUsuarioSelected ?> value="<?php echo $tiposUsuario->id_tipo_usuario ?>"><?php echo $tiposUsuario->ds_tipo_usuario ?></option>
+                            <option <?php echo $perfilUsuarioSelected ?> value="<?php echo $perfilUsuario->id_perfil_usuario ?>"><?php echo $perfilUsuario->ds_perfil_usuario ?></option>
                         <?php } ?>
                     </select>
-                    <div class="invalid-feedback"><?php echo $dados['tipoUsuario_erro'] ?></div>
+                    <div class="invalid-feedback"><?php echo $dados['perfilUsuario_erro'] ?></div>
                 </div>
                 <div class="mb-3">
-                    <label for="txtEmail" class="form-label">Cargo usuário: *</label>
-                    <select class="form-select <?php echo $dados['tipoCargo_erro'] ? 'is-invalid' : '' ?>" name="cboCargoUsuario" id="cboCargoUsuario">
+                    <label for="cboEditoriaUsuario" class="form-label">Editoria usuário: *</label>
+                    <select class="form-select <?php echo $dados['editoriaUsuario_erro'] ? 'is-invalid' : '' ?>" name="cboEditoriaUsuario" id="cboEditoriaUsuario">
                         <option value="NULL"></option>
-                        <?php foreach ($dados['cargoUsuario'] as $cargoUsuario) {
+                        <?php foreach ($dados['editoriaUsuario'] as $editoriaUsuario) {
                             //Resgata valor do select 
-                            $cargoSelected = ''; 
-                            if($cargoUsuario->id_cargo == $dados['cboCargoUsuario']){
-                                $cargoSelected = 'selected';
+                            $editoriaSelected = ''; 
+                            if($editoriaUsuario->id_editoria == $dados['cboEditoriaUsuario']){
+                                $editoriaSelected = 'selected';
                             }
                             ?>
-                            <option <?php echo $cargoSelected ?> value="<?php echo $cargoUsuario->id_cargo ?>"><?php echo $cargoUsuario->ds_cargo ?></option>
+                            <option <?php echo $editoriaSelected ?> value="<?php echo $editoriaUsuario->id_editoria ?>"><?php echo $editoriaUsuario->ds_editoria ?></option>
                         <?php
                         } ?>
                     </select>
-                    <div class="invalid-feedback"><?php echo $dados['tipoCargo_erro'] ?></div>
+                    <div class="invalid-feedback"><?php echo $dados['editoriaUsuario_erro'] ?></div>
                 </div>
                 <div class="mb-3">
                     <label for="txtSenha" class="form-label">Senha: *</label>
@@ -62,10 +62,15 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="submit" value="Cadastrar" class="btn btn-artcor">
+                        <input type="submit" value="Cadastrar" id="btn" class="btn btn-artcor">
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        disableEditoria();
+    })
+</script>

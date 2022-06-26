@@ -52,16 +52,18 @@ class Usuario
     //Armazena usuário no banco
     public function armazenarUsuario($dados)
     {
-
-        $this->db->query("INSERT INTO tb_usuario (ds_nome_usuario, ds_email_usuario, ds_senha, fk_cargo, fk_tipo_usuario) VALUES (:ds_nome_usuario, :ds_email_usuario, :ds_senha, :fk_cargo, :fk_tipo_usuario)");
+        // var_dump($dados);
+        // exit();
+        
+        $this->db->query("INSERT INTO tb_usuario (ds_nome_usuario, ds_email_usuario, ds_senha, fk_editoria, fk_perfil_usuario) VALUES (:ds_nome_usuario, :ds_email_usuario, :ds_senha, :fk_editoria, :fk_perfil_usuario)");
 
         $this->db->bind("ds_nome_usuario", $dados['txtNome']);
         $this->db->bind("ds_email_usuario", $dados['txtEmail']);
         $this->db->bind("ds_senha", $dados['txtSenha']);
-        $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
-        $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
+        $this->db->bind("fk_editoria", $dados['cboEditoriaUsuario']);
+        $this->db->bind("fk_perfil_usuario", $dados['cboPerfilUsuario']);
 
-
+        // $this->db->imprimeSqlMontada();
         if ($this->db->executa()) {
             return true;
         } else {
@@ -79,16 +81,16 @@ class Usuario
         return $this->db->resultado();
     }
 
-    public function listarTipoUsuario()
+    public function listarPerfilUsuario()
     {
-        $this->db->query("SELECT * FROM tb_tipo_usuario ORDER BY ds_tipo_usuario");
+        $this->db->query("SELECT * FROM tb_perfil_usuario ORDER BY ds_perfil_usuario");
 
         return $this->db->resultados();
     }
 
-    public function listarCargoUsuario()
+    public function listarEditoriaUsuario()
     {
-        $this->db->query("SELECT * FROM tb_cargo ORDER BY ds_cargo");
+        $this->db->query("SELECT * FROM tb_editoria ORDER BY ds_editoria");
 
         return $this->db->resultados();
     }
@@ -108,15 +110,15 @@ class Usuario
         $this->db->query("UPDATE tb_usuario SET
             ds_nome_usuario = :ds_nome_usuario,
             ds_email_usuario = :ds_email_usuario,
-            fk_cargo = :fk_cargo,
-            fk_tipo_usuario = :fk_tipo_usuario
+            fk_editoria = :fk_editoria,
+            fk_perfil_usuario = :fk_perfil_usuario
             WHERE id_usuario = :id_usuario
         ");
 
         $this->db->bind("ds_nome_usuario", $dados['txtNome']);
         $this->db->bind("ds_email_usuario", $dados['txtEmail']);
-        $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
-        $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
+        $this->db->bind("fk_editoria", $dados['cboEditoriaUsuario']);
+        $this->db->bind("fk_perfil_usuario", $dados['cboPerfilUsuario']);
         $this->db->bind("id_usuario", $dados['id_usuario']);
 
         if ($this->db->executa()) {
@@ -132,16 +134,16 @@ class Usuario
         $this->db->query("UPDATE tb_usuario SET
             ds_nome_usuario = :ds_nome_usuario,
             ds_email_usuario = :ds_email_usuario,
-            fk_cargo = :fk_cargo,
-            fk_tipo_usuario = :fk_tipo_usuario,
+            fk_editoria = :fk_editoria,
+            fk_perfil_usuario = :fk_perfil_usuario,
             ds_senha = :ds_senha
             WHERE id_usuario = :id_usuario
         ");
 
         $this->db->bind("ds_nome_usuario", $dados['txtNome']);
         $this->db->bind("ds_email_usuario", $dados['txtEmail']);
-        $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
-        $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
+        $this->db->bind("fk_editoria", $dados['cboEditoriaUsuario']);
+        $this->db->bind("fk_perfil_usuario", $dados['cboPerfilUsuario']);
         $this->db->bind("id_usuario", $dados['id_usuario']);
         $this->db->bind("ds_senha", $dados['txtSenha']);
 

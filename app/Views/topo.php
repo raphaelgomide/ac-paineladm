@@ -10,7 +10,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <?php if (isset($_SESSION['id_usuario'])) {
-                            if ($_SESSION['fk_tipo_usuario'] == 1) { ?>
+                            if ($_SESSION['fk_perfil_usuario'] == 1) { ?>
                                 
                                 <li class="nav-item">
                                     <a class="li-a-artcor nav-link" aria-current="page" href="<?php echo URL ?>">Home</a>

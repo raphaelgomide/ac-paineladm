@@ -30,24 +30,33 @@ class UsuariosController extends Controller
     public function cadastrar()
     {
 
-        $tiposUsuario = $this->usuarioModel->listarTipoUsuario();
-        $cargoUsuario = $this->usuarioModel->listarCargoUsuario();
+        $perfilUsuario = $this->usuarioModel->listarPerfilUsuario();
+        $editoriaUsuario = $this->usuarioModel->listarEditoriaUsuario();
 
         //Evita que codigos maliciosos sejam enviados pelos campos
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         if (isset($formulario)) {
+
+            if (!in_array("cboPerfilUsuario", $formulario)){
+                $cboEditoriaUsuario = NULL;
+            } else {
+                $cboEditoriaUsuario = $formulario['cboEditoriaUsuario'];
+            }
 
             $dados = [
                 'txtNome' => trim($formulario['txtNome']),
                 'txtEmail' => trim($formulario['txtEmail']),
                 'txtSenha' => trim($formulario['txtSenha']),
                 'txtConfirmaSenha' => trim($formulario['txtConfirmaSenha']),
-                'cboTipoUsuario' => $formulario['cboTipoUsuario'],
-                'cboCargoUsuario' => $formulario['cboCargoUsuario'],
-                'tiposUsuario' => $tiposUsuario,
-                'cargoUsuario' => $cargoUsuario
+                'cboPerfilUsuario' => $formulario['cboPerfilUsuario'],
+                'cboEditoriaUsuario' => $cboEditoriaUsuario,
+                'perfilUsuario' => $perfilUsuario,
+                'editoriaUsuario' => $editoriaUsuario
             ];
 
+            // var_dump($dados['cboEditoriaUsuario']);
+            // exit();
+            
             if (in_array("", $formulario)) {
 
                 //Verifica se está vazio
@@ -57,12 +66,12 @@ class UsuariosController extends Controller
                 if (empty($formulario['txtEmail'])) {
                     $dados['email_erro'] = "Preencha o email";
                 }
-                if ($formulario['cboTipoUsuario'] == 'NULL') {
-                    $dados['tipoUsuario_erro'] = "Escolha um tipo de usuário";
+                if ($formulario['cboPerfilUsuario'] == 'NULL') {
+                    $dados['perfilUsuario_erro'] = "Escolha um perfil de usuário";
                 }
-                if ($formulario['cboCargoUsuario'] == 'NULL') {
-                    $dados['tipoCargo_erro'] = "Escolha um cargo de usuário";
-                }
+                // if ($formulario['cboEditoriaUsuario'] == 'NULL') {
+                //     $dados['editoriaUsuario_erro'] = "Escolha uma editoria de usuário";
+                // }
                 if (empty($formulario['txtSenha'])) {
                     $dados['senha_erro'] = "Preencha a senha";
                 }
@@ -90,26 +99,28 @@ class UsuariosController extends Controller
 
                         //Para exibir mensagem success , não precisa informar o tipo de classe
                         Alertas::mensagem('usuario', 'Usuário cadastrado com sucesso');
-                        Redirecionamento::redirecionar('usuariosController/visualizar');
+                        Redirecionamento::redirecionar('usuariosController');
                     } else {
                         die("Erro ao armazenar usuário no banco de dados");
                     }
                 }
             }
         } else {
+
             $dados = [
                 'txtNome' => '',
                 'txtEmail' => '',
+                'cboEditoriaUsuario' => '',
                 'txtSenha' => '',
                 'txtConfirmaSenha' => '',
                 'nome_erro' => '',
                 'email_erro' => '',
                 'senha_erro' => '',
                 'confirma_senha_erro' => '',
-                'tipoUsuario_erro' => '',
-                'tipoCargo_erro' => '',
-                'tiposUsuario' => $tiposUsuario,
-                'cargoUsuario' => $cargoUsuario
+                'perfilUsuario_erro' => '',
+                'editoriaUsuario_erro' => '',
+                'perfilUsuario' => $perfilUsuario,
+                'editoriaUsuario' => $editoriaUsuario
             ];
         }
 
@@ -121,8 +132,8 @@ class UsuariosController extends Controller
     {
 
         $usuario = $this->usuarioModel->lerUsuarioPorId($id);
-        $tiposUsuario = $this->usuarioModel->listarTipoUsuario();
-        $cargoUsuario = $this->usuarioModel->listarCargoUsuario();
+        $perfilUsuario = $this->usuarioModel->listarPerfilUsuario();
+        $editoriaUsuario = $this->usuarioModel->listarEditoriaUsuario();
 
         //Evita que codigos maliciosos sejam enviados pelos campos
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -133,46 +144,60 @@ class UsuariosController extends Controller
                 'txtEmail' => trim($formulario['txtEmail']),
                 'txtSenha' => trim($formulario['txtSenha']),
                 'txtConfirmaSenha' => trim($formulario['txtConfirmaSenha']),
-                'cboTipoUsuario' => $formulario['cboTipoUsuario'],
-                'cboCargoUsuario' => $formulario['cboCargoUsuario'],
+                'cboPerfilUsuario' => $formulario['cboPerfilUsuario'],
+                'cboEditoriaUsuario' => $formulario['cboEditoriaUsuario'],
                 'id_usuario' => $id,
                 'usuario' => $usuario,
-                'tiposUsuario' => $tiposUsuario,
-                'cargoUsuario' => $cargoUsuario
+                'perfilUsuario' => $perfilUsuario,
+                'editoriaUsuario' => $editoriaUsuario
 
             ];
 
-            // var_dump($dados['txtNome']);
+            // var_dump($dados);
+            // exit();
 
-            if (Checa::checarNome($formulario['txtNome'])) {
-                $dados['nome_erro'] = "Nome inválido";
-            } elseif (Checa::checarEmail($formulario['txtEmail'])) {
-                $dados['email_erro'] = "Email inválido";
+            //Verifica se está vazio
+            if (empty($formulario['txtNome'])) {
+                $dados['nome_erro'] = "Preencha o Nome";
+            }
+            if (empty($formulario['txtEmail'])) {
+                $dados['email_erro'] = "Preencha o email";
+            }
+            if ($formulario['cboPerfilUsuario'] == 'NULL') {
+                $dados['perfilUsuario_erro'] = "Escolha um perfil de usuário";
+            // }
+            // if ($formulario['cboEditoriaUsuario'] == 'NULL') {
+            //     $dados['editoriaUsuario_erro'] = "Escolha uma editoria de usuário";
             } else {
-                // var_dump($formulario['txtSenha']);
 
-                if ($formulario['txtSenha'] == "" && $formulario['txtConfirmaSenha'] == "") {
-
-                    if ($this->usuarioModel->atualizarUsuariosSemSenha($dados)) {
-                        //Para exibir mensagem success , não precisa informar o tipo de classe
-                        Alertas::mensagem('usuario', 'Usuário atualizado com sucesso');
-                        Redirecionamento::redirecionar('usuariosController');
-                    }
+                if (Checa::checarNome($formulario['txtNome'])) {
+                    $dados['nome_erro'] = "Nome inválido";
+                } elseif (Checa::checarEmail($formulario['txtEmail'])) {
+                    $dados['email_erro'] = "Email inválido";
                 } else {
 
-                    if (strlen($formulario['txtSenha']) < 6) {
-                        $dados['senha_erro'] = "A senha precisa ter no mínimo 6 caracteres";
-                    } elseif ($formulario['txtSenha'] != $formulario['txtConfirmaSenha']) {
-                        $dados['confirma_senha_erro'] = "As senhas são diferentes";
-                    } else {
-
-                        //Criptografa a senha com hash em php
-                        $dados['txtSenha'] = password_hash($formulario['txtSenha'], PASSWORD_DEFAULT);
-
-                        if ($this->usuarioModel->atualizarUsuariosComSenha($dados)) {
+                    if ($formulario['txtSenha'] == "" && $formulario['txtConfirmaSenha'] == "") {
+                        if ($this->usuarioModel->atualizarUsuariosSemSenha($dados)) {
                             //Para exibir mensagem success , não precisa informar o tipo de classe
                             Alertas::mensagem('usuario', 'Usuário atualizado com sucesso');
                             Redirecionamento::redirecionar('usuariosController');
+                        }
+                    } else {
+
+                        if (strlen($formulario['txtSenha']) < 6) {
+                            $dados['senha_erro'] = "A senha precisa ter no mínimo 6 caracteres";
+                        } elseif ($formulario['txtSenha'] != $formulario['txtConfirmaSenha']) {
+                            $dados['confirma_senha_erro'] = "As senhas são diferentes";
+                        } else {
+
+                            //Criptografa a senha com hash em php
+                            $dados['txtSenha'] = password_hash($formulario['txtSenha'], PASSWORD_DEFAULT);
+
+                            if ($this->usuarioModel->atualizarUsuariosComSenha($dados)) {
+                                //Para exibir mensagem success , não precisa informar o tipo de classe
+                                Alertas::mensagem('usuario', 'Usuário atualizado com sucesso');
+                                Redirecionamento::redirecionar('usuariosController');
+                            }
                         }
                     }
                 }
@@ -181,9 +206,15 @@ class UsuariosController extends Controller
 
 
             $dados = [
+                'nome_erro' => '',
+                'email_erro' => '',
+                'senha_erro' => '',
+                'confirma_senha_erro' => '',
+                'perfilUsuario_erro' => '',
+                'editoriaUsuario_erro' => '',
                 'usuario' => $usuario,
-                'tiposUsuario' => $tiposUsuario,
-                'cargoUsuario' => $cargoUsuario
+                'perfilUsuario' => $perfilUsuario,
+                'editoriaUsuario' => $editoriaUsuario
             ];
         }
         //Retorna para a view

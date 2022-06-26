@@ -64,8 +64,8 @@ class LoginController extends Controller
         unset($_SESSION['id_usuario']);
         unset($_SESSION['ds_nome_usuario']);
         unset($_SESSION['ds_email_usuario']);
-        unset($_SESSION['fk_cargo']);
-        unset($_SESSION['fk_tipo_usuario']);
+        unset($_SESSION['fk_editoria']);
+        unset($_SESSION['fk_perfil_usuario']);
 
         session_destroy();
 
@@ -78,8 +78,8 @@ class LoginController extends Controller
         $_SESSION['id_usuario'] = $usuario->id_usuario;
         $_SESSION['ds_nome_usuario'] = $usuario->ds_nome_usuario;
         $_SESSION['ds_email_usuario'] = $usuario->ds_email_usuario;
-        $_SESSION['fk_cargo'] = $usuario->fk_cargo;
-        $_SESSION['fk_tipo_usuario'] = $usuario->fk_tipo_usuario;
+        $_SESSION['fk_editoria'] = $usuario->fk_editoria;
+        $_SESSION['fk_perfil_usuario'] = $usuario->fk_perfil_usuario;
 
         Redirecionamento::redirecionar('paginas/home');
     }

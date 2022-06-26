@@ -6,6 +6,8 @@
             <li class="breadcrumb-item active" aria-current="page"><?php echo $dados['agenda']->ds_nome_convidado ?></li>
         </ol>
     </nav>
+    <!-- Captura de horas para definição de data minima dos campos date -->
+    <?php $diaHoje = date('Y-m-d');?>
 
     <div class="card">
         <div class="card-body">
@@ -22,7 +24,7 @@
 
                 <div class="mb-3">
                     <label for="txtDataEntrevistaEscrita" class="form-label">Data Entrevista Escrita: *</label>
-                    <input type="date" class="form-control <?php echo $dados['dataEntrevista_erro'] ? 'is-invalid' : '' ?>" name="txtDataEntrevistaEscrita" id="txtDataEntrevistaEscrita" value="<?php echo $dados['agenda']->dt_entrevista_escrita ?>">
+                    <input type="date" class="form-control <?php echo $dados['dataEntrevista_erro'] ? 'is-invalid' : '' ?>" name="txtDataEntrevistaEscrita" id="txtDataEntrevistaEscrita"  value="<?php echo $dados['agenda']->dt_entrevista_escrita ?>" min="<?php echo $diaHoje?>">
                     <div class="invalid-feedback"><?php echo $dados['dataEntrevista_erro'] ?></div>
                 </div>
 
@@ -33,14 +35,14 @@
 
                 <div class="mb-3">
                     <label for="txtDataTreinamento" class="form-label">Data e Hora do Treinamento: </label>
-                    <input type="date" class="form-control" name="txtDataTreinamento" id="txtDataTreinamento" value="<?php echo $dados['agenda']->dt_treinamento ?>">
+                    <input type="date" class="form-control" name="txtDataTreinamento" id="txtDataTreinamento" value="<?php echo $dados['agenda']->dt_treinamento ?>" min="<?php echo $diaHoje?>">
                     <br>
                     <input type="time" class="timepicker" id="demo" name="txtHoraTreinamento" id="txtHoraTreinamento" value="<?php echo $dados['agenda']->dt_hora_treinamento?>"/>
                 </div>
 
                 <div class="mb-3">
                     <label for="txtDataLivee" class="form-label">Data e Hora da Live:</label>
-                    <input type="date" class="form-control" name="txtDataLive" id="txtDataLive" value="<?php echo $dados['agenda']->dt_live ?>">
+                    <input type="date" class="form-control" name="txtDataLive" id="txtDataLive" value="<?php echo $dados['agenda']->dt_live ?>" min="<?php echo $diaHoje?>">
                     <br>
                     <input type="time" class="timepicker" id="demo" name="txtHoraLive" id="txtHoraLive" value="<?php echo $dados['agenda']->dt_hora_live?>"/>
                 </div>
@@ -89,7 +91,7 @@
         step: 900,
 
         // custom placeholder
-        placeholder: '-',
+        placeholder: '--:--',
 
     });
 </script>

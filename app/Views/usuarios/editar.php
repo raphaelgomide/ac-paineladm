@@ -12,7 +12,7 @@
             <small>Preencha o formulário abaixo para edtar usuário</small>
 
             <form name="editar" method="POST" action="<?php echo URL . '/usuariosController/editar/' . $dados['usuario']->id_usuario ?>">
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                     <label for="txtNome" class="form-label">Nome: *</label>
                     <input type="text" class="form-control <?php echo $dados['nome_erro'] ? 'is-invalid' : '' ?>" name="txtNome" id="txtNome" value="<?php echo $dados['usuario']->ds_nome_usuario ?>">
                     <!-- Div para exibir o erro abaixo do campo -->

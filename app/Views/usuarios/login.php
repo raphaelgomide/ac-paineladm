@@ -8,7 +8,7 @@
             <small>Preencha o formulário abaixo para realizar o login</small>
 
             <form name="cadastrar" method="POST" action="<?php echo URL ?>/LoginController/login">
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                     <label for="txtEmail" class="form-label">E-mail: *</label>
                     <input type="text" class="form-control <?php echo $dados['email_erro'] ? 'is-invalid' : '' ?>" name="txtEmail" id="txtEmail" value="<?php echo $dados['txtEmail'] ?>">
                     <div class="invalid-feedback"><?php echo $dados['email_erro']?></div>

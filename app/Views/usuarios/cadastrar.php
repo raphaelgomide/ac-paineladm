@@ -13,7 +13,7 @@
             <small>Preencha o formulário abaixo para cadastrar um novo usuário</small>
 
             <form name="cadastrar" method="POST" action="<?php echo URL ?>/usuariosController/cadastrar">
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                     <label for="txtNome" class="form-label">Nome: *</label>
                     <input type="text" class="form-control <?php echo $dados['nome_erro'] ? 'is-invalid' : '' ?>" name="txtNome" id="txtNome" value="<?php echo $dados['txtNome'] ?>">
                     <!-- Div para exibir o erro abaixo do campo -->

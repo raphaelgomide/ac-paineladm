@@ -15,7 +15,7 @@
             <small>Preencha o formulário abaixo para cadastrar um novo evento</small>
 
             <form name="cadastrar" method="POST" action="<?php echo URL ?>/agendaController/cadastrar">
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                     <label for="txtNomeConvidado" class="form-label">Nome do Convidado: *</label>
                     <input type="text" class="form-control <?php echo $dados['nome_erro'] ? 'is-invalid' : '' ?>" name="txtNomeConvidado" id="txtNomeConvidado">
                     <!-- Div para exibir o erro abaixo do campo -->

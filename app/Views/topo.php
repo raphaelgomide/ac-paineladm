@@ -20,7 +20,7 @@
 
                                     <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-artcor nav-link" aria-current="page" href="<?php echo URL . '/usuariosController/visualizar' ?>">Usuário</a></li>
+                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/usuariosController/visualizar' ?>">Usuário</a></li>
                                     </ul>
                                 </li>
 
@@ -28,7 +28,7 @@
 
                                     <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Agendas</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-artcor nav-link" aria-current="page" href="<?php echo URL . '/agendaController' ?>">AC encontros Literários</a></li>
+                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/agendaController' ?>">AC encontros Literários</a></li>
                                     </ul>
                                 </li>
                         <?php }

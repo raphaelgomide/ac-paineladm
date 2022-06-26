@@ -1,4 +1,12 @@
 <div class="col-xl-4 col-md-6 mx-auto p-5">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?php echo URL ?>/usuariosController">Usuários</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cadastro de Usuário</li>
+        </ol>
+    </nav>
+
     <div class="card">
         <div class="card-body">
             <h2>Cadastro de Usuário</h2>
@@ -21,10 +29,10 @@
                     <label for="cboPerfilUsuario" class="form-label">Perfil usuário: *</label>
                     <select class="form-select <?php echo $dados['perfilUsuario_erro'] ? 'is-invalid' : '' ?>" name="cboPerfilUsuario" id="cboPerfilUsuario" onchange="disableEditoria()">
                         <option value="NULL"></option>
-                        <?php foreach ($dados['perfilUsuario'] as $perfilUsuario) { 
+                        <?php foreach ($dados['perfilUsuario'] as $perfilUsuario) {
                             //Resgata valor do select 
-                            $perfilUsuarioSelected = ''; 
-                            if($perfilUsuario->id_perfil_usuario == $dados['cboPerfilUsuario']){
+                            $perfilUsuarioSelected = '';
+                            if ($perfilUsuario->id_perfil_usuario == $dados['cboPerfilUsuario']) {
                                 $perfilUsuarioSelected = 'selected';
                             }
                         ?>
@@ -39,11 +47,11 @@
                         <option value="NULL"></option>
                         <?php foreach ($dados['editoriaUsuario'] as $editoriaUsuario) {
                             //Resgata valor do select 
-                            $editoriaSelected = ''; 
-                            if($editoriaUsuario->id_editoria == $dados['cboEditoriaUsuario']){
+                            $editoriaSelected = '';
+                            if ($editoriaUsuario->id_editoria == $dados['cboEditoriaUsuario']) {
                                 $editoriaSelected = 'selected';
                             }
-                            ?>
+                        ?>
                             <option <?php echo $editoriaSelected ?> value="<?php echo $editoriaUsuario->id_editoria ?>"><?php echo $editoriaUsuario->ds_editoria ?></option>
                         <?php
                         } ?>
@@ -70,7 +78,7 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         disableEditoria();
     })
 </script>

@@ -39,7 +39,7 @@
                         foreach ($dados['usuarios'] as $usuarios) { ?>
 
                             <tr>
-                                <td><?php echo $usuarios->ds_nome_usuario ?></td>
+                                <td><?php echo ucfirst($usuarios->ds_nome_usuario) ?></td>
                                 <td><?php echo $usuarios->ds_email_usuario ?></td>                                
 
                             <td><a href="<?php echo URL . '/usuariosController/editar/' . $usuarios->id_usuario ?>" class="btn btn-artcor"><i class="bi bi-pencil-square"></i></a></td>

@@ -45,7 +45,7 @@
                         foreach ($dados['eventos'] as $eventos) { ?>
 
                             <tr>
-                                <td><?php echo $eventos->ds_nome_convidado ?></td>
+                                <td><?php echo ucfirst($eventos->ds_nome_convidado) ?></td>
                                 <td><?php echo Checa::dataBr($eventos->dt_entrevista_escrita) ?></td>
 
                                 <!-- Verifica se link está vazio e não exibir botão de link vazio -->

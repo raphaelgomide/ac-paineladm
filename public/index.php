@@ -17,20 +17,20 @@ include './../app/autoload.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link href="<?php echo URL ?>/public/css/estilos.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="<?php echo URL ?>/public/js/jquery.funcoes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>    
     <title><?php echo APP_NOME ?></title>
 </head>
 
 <body>
-
+    
     <?php
     include APP.'/views/topo.php';
     $rotas = new Rota();
     include APP.'/views/rodape.php';
-
     ?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo URL ?>/public/js/jquery.funcoes.js"></script>
+
 </body>
 
 </html>

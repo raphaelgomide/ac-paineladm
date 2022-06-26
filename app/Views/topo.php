@@ -20,7 +20,8 @@
 
                                     <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/usuariosController/visualizar' ?>">Usuário</a></li>
+                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/usuariosController/visualizar' ?>">Usuários</a></li>
+                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/editoriasController/visualizar' ?>">Editorias</a></li>
                                     </ul>
                                 </li>
 

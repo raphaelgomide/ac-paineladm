@@ -26,9 +26,9 @@
 
                                 <li class="nav-item dropdown">
 
-                                    <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Encontros literários</a>
+                                    <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Agendas</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-artcor nav-link" aria-current="page" href="<?php echo URL . '/agendaController' ?>">Agenda Convidados</a></li>
+                                        <li><a class="dropdown-artcor nav-link" aria-current="page" href="<?php echo URL . '/agendaController' ?>">AC encontros Literários</a></li>
                                     </ul>
                                 </li>
                         <?php }

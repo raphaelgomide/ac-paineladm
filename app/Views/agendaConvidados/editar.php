@@ -36,14 +36,14 @@
                     <label for="txtDataTreinamento" class="form-label">Data e Hora do Treinamento: </label>
                     <input type="date" class="form-control" name="txtDataTreinamento" id="txtDataTreinamento" value="<?php echo $dados['agenda']->dt_treinamento ?>">
                     <br>
-                    <input type="time" class="form-control" name="txtHoraTreinamento" id="txtHoraTreinamento" value="<?php echo Checa::horaFormat($dados['agenda']->dt_hora_treinamento) ?>">
+                    <input type="time" class="timepicker" id="demo" name="txtHoraTreinamento" id="txtHoraTreinamento" value="<?php echo $dados['agenda']->dt_hora_treinamento?>"/>
                 </div>
 
                 <div class="mb-3">
                     <label for="txtDataLivee" class="form-label">Data e Hora da Live:</label>
                     <input type="date" class="form-control" name="txtDataLive" id="txtDataLive" value="<?php echo $dados['agenda']->dt_live ?>">
                     <br>
-                    <input type="time" class="form-control" name="txtHoraLive" id="txtHoraLive" value="<?php echo Checa::horaFormat($dados['agenda']->dt_hora_live) ?>">
+                    <input type="time" class="timepicker" id="demo" name="txtHoraLive" id="txtHoraLive" value="<?php echo $dados['agenda']->dt_hora_live?>"/>
                 </div>
 
                 <div class="mb-3">
@@ -67,3 +67,30 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+
+        $('.timepicker').qcTimepicker();
+
+    });
+
+    $('.timepicker').qcTimepicker({
+
+        // additional CSS classes
+        classes: 'form-control',
+
+        // time format
+        format: 'H:mm',
+
+        // min/max time
+        minTime: '14:00:00',
+        maxTime: '19:59:59',
+
+        // step size in ms
+        step: 900,
+
+        // custom placeholder
+        placeholder: '-',
+
+    });
+</script>

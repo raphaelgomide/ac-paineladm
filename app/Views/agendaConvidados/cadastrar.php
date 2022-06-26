@@ -37,7 +37,7 @@
                     <label for="txtDataTreinamento" class="form-label">Data e Hora do Treinamento: </label>
                     <input type="date" class="form-control" name="txtDataTreinamento" id="txtDataTreinamento">
                     <br>
-                    <input type="time" class="form-control" name="txtHoraTreinamento" id="txtHoraTreinamento">
+                    <input type="time" class="timepicker" id="demo" name="txtHoraTreinamento" id="txtHoraTreinamento"/>
                 </div>
 
                 <div class="mb-3">
@@ -45,7 +45,7 @@
                     <input type="date" class="form-control" name="txtDataLive" id="txtDataLive">
                     <div class="invalid-feedback"><?php echo $dados['email_erro'] ?></div>
                     <br>
-                    <input type="time" class="form-control" name="txtHoraLive" id="txtHoraLive">
+                    <input type="time" class="timepicker" id="demo" name="txtHoraLive" id="txtHoraLive"/>
                     <div class="invalid-feedback"><?php echo $dados['email_erro'] ?></div>
                 </div>
 
@@ -63,3 +63,30 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+
+        $('.timepicker').qcTimepicker();
+
+    });
+
+    $('.timepicker').qcTimepicker({
+
+        // additional CSS classes
+        classes: 'form-control',
+
+        // time format
+        format: 'H:mm',
+
+        // min/max time
+        minTime: '14:00:00',
+        maxTime: '19:59:59',
+
+        // step size in ms
+        step: 900,
+
+        // custom placeholder
+        placeholder: '-',
+
+    });
+</script>

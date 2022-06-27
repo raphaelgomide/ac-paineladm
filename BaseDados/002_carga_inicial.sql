@@ -68,3 +68,5 @@ CREATE TABLE IF NOT EXISTS `tb_agenda_convidados` (
   CONSTRAINT `fk_usuario_edicao_tb_agenda_convidados` FOREIGN KEY (`fk_usuario_edicao`) REFERENCES `tb_usuario` (`id_usuario`),
   CONSTRAINT `fk_usuario_tb_agenda_convidados` FOREIGN KEY (`fk_usuario`) REFERENCES `tb_usuario` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+UPDATE `ac-paineladm`.`tb_usuario` SET `id_usuario`='0' WHERE  `id_usuario`=11;

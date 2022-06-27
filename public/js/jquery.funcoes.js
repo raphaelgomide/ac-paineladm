@@ -1,4 +1,3 @@
-
 //Somente habilita o campo quando o perfil do usuario for colaborador
 function disableEditoria() {
 

@@ -139,13 +139,19 @@ class UsuariosController extends Controller
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         if (isset($formulario)) {
 
+            if (!in_array("cboPerfilUsuario", $formulario)){
+                $cboEditoriaUsuario = NULL;
+            } else {
+                $cboEditoriaUsuario = $formulario['cboEditoriaUsuario'];
+            }
+
             $dados = [
                 'txtNome' => trim($formulario['txtNome']),
                 'txtEmail' => trim($formulario['txtEmail']),
                 'txtSenha' => trim($formulario['txtSenha']),
                 'txtConfirmaSenha' => trim($formulario['txtConfirmaSenha']),
                 'cboPerfilUsuario' => $formulario['cboPerfilUsuario'],
-                'cboEditoriaUsuario' => $formulario['cboEditoriaUsuario'],
+                'cboEditoriaUsuario' => $cboEditoriaUsuario,
                 'id_usuario' => $id,
                 'usuario' => $usuario,
                 'perfilUsuario' => $perfilUsuario,

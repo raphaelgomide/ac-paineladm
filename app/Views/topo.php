@@ -9,31 +9,32 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <?php if (isset($_SESSION['id_usuario'])) {
-                            if ($_SESSION['fk_perfil_usuario'] == 1) { ?>
-                                
-                                <li class="nav-item">
-                                    <a class="li-a-artcor nav-link" aria-current="page" href="<?php echo URL ?>">Home</a>
-                                </li>
 
-                                <li class="nav-item dropdown">
+                        <?php if (isset($_SESSION['id_usuario']) && $_SESSION['fk_perfil_usuario'] == 1) { ?>
 
-                                    <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/usuariosController/visualizar' ?>">Usuários</a></li>
-                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/editoriasController/visualizar' ?>">Editorias</a></li>
-                                    </ul>
-                                </li>
+                            <li class="nav-item">
+                                <a class="li-a-artcor nav-link" aria-current="page" href="<?php echo URL ?>">Home</a>
+                            </li>
 
-                                <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
 
-                                    <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Agendas</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/agendaController' ?>">AC encontros Literários</a></li>
-                                    </ul>
-                                </li>
-                        <?php }
-                        } ?>
+                                <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Cadastro</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/usuariosController/visualizar' ?>">Usuários</a></li>
+                                    <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/editoriasController/visualizar' ?>">Editorias</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+
+                                <a class="li-a-artcor nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Agendas</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-artcor nav-link dropdown-item" aria-current="page" href="<?php echo URL . '/agendaController' ?>">AC encontros Literários</a></li>
+                                </ul>
+                            </li>
+
+                        <?php } ?>
+
 
                         <li class="nav-item">
                             <a class="nav-link li-a-artcor" href="<?php echo URL . '/paginas/sobre' ?>">Sobre nós</a>

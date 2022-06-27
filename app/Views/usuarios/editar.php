@@ -26,7 +26,7 @@
 
                 <div class="mb-3">
                     <label for="cboPerfilUsuario" class="form-label">Perfil usuário: *</label>
-                    <select class="form-select <?php echo $dados['perfilUsuario_erro'] ? 'is-invalid' : '' ?>" name="cboPerfilUsuario" id="cboPerfilUsuario">
+                    <select class="form-select <?php echo $dados['perfilUsuario_erro'] ? 'is-invalid' : '' ?>" name="cboPerfilUsuario" id="cboPerfilUsuario" onchange="disableEditoria()">
                         <option value="NULL"></option>
                         <?php foreach ($dados['perfilUsuario'] as $perfilUsuario) {
                             //Resgata valor do select 
@@ -76,3 +76,8 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        disableEditoria();
+    })
+</script>
